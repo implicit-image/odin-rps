@@ -10,10 +10,9 @@ function getComputerChoice() {
 
 
 function getHumanChoice(correctionNeeded) {
-  let message = "We are playing rock paper scissors.\nWhats your play?"
-  if (correctionNeeded) {
-    message = "Incorrect value entered. Please enter correct value :)"
-  }
+  let message = correctionNeeded
+      ? `Incorrect value entered. Please enter correct value :)`
+      : "We are playing rock paper scissors.\nWhats your play?"
   let choice = prompt(message)
   if (items.includes(choice.toUpperCase()))
     return choice.toUpperCase()
@@ -21,8 +20,10 @@ function getHumanChoice(correctionNeeded) {
 }
 
 function fight(choices) {
+  // early out
   if (choices.player == -1 || choices.computer == -1) return -1
   if (choices.player == choices.computer) return "draw"
+
   if (choices.player == ROCK) {
     if (choices.computer == PAPER) return "computer"
     if (choices.computer == SCISSORS) return "player"
